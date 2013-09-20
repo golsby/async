@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms;
@@ -13,7 +8,7 @@ namespace async
 {
   public partial class FactorialDialog : Form
   {
-    CancellationTokenSource m_cancellationTokenSource;
+    CancellationTokenSource m_cancellation_token_source;
 
     public FactorialDialog()
     {
@@ -49,11 +44,11 @@ namespace async
           break;
         case "Async with Progress and Cancel":
           progress.ProgressChanged += ProgressChanged;
-          m_cancellationTokenSource = new CancellationTokenSource();
+          m_cancellation_token_source = new CancellationTokenSource();
           try
           {
             buttonCancel.Enabled = true;
-            result = await ComputeFactorialAsync(n, progress, m_cancellationTokenSource.Token);
+            result = await ComputeFactorialAsync(n, progress, m_cancellation_token_source.Token);
           }
           catch (OperationCanceledException)
           {
@@ -89,17 +84,14 @@ namespace async
     /// <param name="e"></param>
     private void buttonChangeBackground_Click(object sender, EventArgs e)
     {
-      if (this.BackColor == Color.White)
-        this.BackColor = Color.Gainsboro;
-      else
-        this.BackColor = Color.White;
+      this.BackColor = this.BackColor == Color.White ? Color.Gainsboro : Color.White;
     }
 
     // Handler for cancel button.
     private void buttonCancel_Click(object sender, EventArgs e)
     {
-      if (m_cancellationTokenSource != null)
-        m_cancellationTokenSource.Cancel();
+      if (m_cancellation_token_source != null)
+        m_cancellation_token_source.Cancel();
     }
     #endregion
 
@@ -155,7 +147,7 @@ namespace async
       Int64 result = 1;
       for (Int64 i = n; i > 1; i--)
       {
-        System.Threading.Thread.Sleep(500);
+        Thread.Sleep(500);
         result *= i;
         if (progress != null)
           progress.Report(result);

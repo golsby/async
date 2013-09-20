@@ -52,12 +52,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ThreadedAsync.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ThreadedAsync.Designer.cs">
-      <DependentUpon>ThreadedAsync.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="FactorialDialog.resx">
       <DependentUpon>FactorialDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -70,9 +64,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ThreadedAsync.resx">
-      <DependentUpon>ThreadedAsync.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
